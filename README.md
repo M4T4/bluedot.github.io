@@ -29,8 +29,23 @@ it will export a JS file and a WASM file to public folder.
 
 # Project Documentation
 
-## 2D physics
+### 2D physics
 
 - [Elastic Collision](docs/elastic_collision.md)
+- [inclined plane]()
 - [Cloth]()
 - [Fluids]()
+
+***
+
+### 3D physics
+
+- [Rigid bodies]()
+
+
+### Research
+
+- [Ammo JS](https://github.com/kripken/ammo.js?tab=readme-ov-file#usage)
+- [Emscripten](https://emscripten.org/docs/compiling/Building-Projects.html)
+- [Cloth simulation](https://github.com/FelipesCoding/cloth_simulation)
+- [Game physics engine course](https://pikuma.com/courses/game-physics-engine-programming)
