@@ -1189,6 +1189,7 @@ var ___wasm_call_ctors = createExportWrapper('__wasm_call_ctors', 0);
 var _add = Module['_add'] = createExportWrapper('add', 2);
 var _multiply = Module['_multiply'] = createExportWrapper('multiply', 2);
 var _updatePosition = Module['_updatePosition'] = createExportWrapper('updatePosition', 1);
+var _testConstant = Module['_testConstant'] = createExportWrapper('testConstant', 0);
 var _fflush = createExportWrapper('fflush', 1);
 var _emscripten_stack_init = wasmExports['emscripten_stack_init']
 var _emscripten_stack_get_free = wasmExports['emscripten_stack_get_free']

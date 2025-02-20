@@ -10,9 +10,11 @@ Module().then((instance) => {
   console.log('Emscripten module initialized');
   addFunction = instance.cwrap('add', 'number', ['number', 'number']);
   updatePosition = instance.cwrap('updatePosition', 'number', ['number']);
+  let testFunction = instance.cwrap('testConstant', 'number', []);
   const multiplyFunction = instance.cwrap('multiply', 'number', ['number', 'number']);
   console.log(addFunction(2, 3)); // Should log 5
-  console.log(multiplyFunction(5,5))
+  console.log(multiplyFunction(5,5));
+  console.log(testFunction());
 
   animate();
 });
