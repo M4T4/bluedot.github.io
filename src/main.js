@@ -8,15 +8,38 @@ let addFunction, updatePosition
 // Wait for the WebAssembly module to initialize
 Module().then((instance) => {
   console.log('Emscripten module initialized');
-  addFunction = instance.cwrap('add', 'number', ['number', 'number']);
-  updatePosition = instance.cwrap('updatePosition', 'number', ['number']);
-  let testFunction = instance.cwrap('testConstant', 'number', []);
-  const multiplyFunction = instance.cwrap('multiply', 'number', ['number', 'number']);
-  console.log(addFunction(2, 3)); // Should log 5
-  console.log(multiplyFunction(5,5));
-  console.log(testFunction());
+
+  // Wrap C++ functions using cwrap
+  const Vector3_create = instance.cwrap('Vector3_create', 'number', ['number', 'number', 'number']);
+  const Vector3_delete = instance.cwrap('Vector3_delete', null, ['number']);
+  const Vector3_magnitude = instance.cwrap('Vector3_magnitude', 'number', ['number']);
+  const Vector3_normalize = instance.cwrap('Vector3_normalize', null, ['number']);
+  const Vector3_add = instance.cwrap('Vector3_add', null, ['number', 'number']);
+  const Vector3_dotProduct = instance.cwrap('Vector3_dotProduct', 'number', ['number', 'number']);
+  const Vector3_crossProduct = instance.cwrap('Vector3_crossProduct', 'number', ['number', 'number']);
+
+  // Test Vector3 functions
+  const vec1 = Vector3_create(1.0, 2.0, 3.0);
+  const vec2 = Vector3_create(4.0, 5.0, 6.0);
+
+  console.log('Magnitude of vec1:', Vector3_magnitude(vec1)); // Should log the magnitude
+  Vector3_normalize(vec1);
+  console.log('Normalized magnitude of vec1:', Vector3_magnitude(vec1)); // Should log 1.0
+
+  Vector3_add(vec1, vec2);
+  console.log('Dot product of vec1 and vec2:', Vector3_dotProduct(vec1, vec2)); // Should log the dot product
+
+  const crossProduct = Vector3_crossProduct(vec1, vec2);
+  console.log('Cross product of vec1 and vec2:', crossProduct); // Should log the cross product
+
+  // Clean up
+  Vector3_delete(vec1);
+  Vector3_delete(vec2);
+  Vector3_delete(crossProduct);
 
   animate();
+}).catch((error) => {
+  console.error('Failed to initialize Emscripten module:', error);
 });
 
 // Settings
